@@ -23,11 +23,12 @@ AIに海馬を与える。大脳を与える。目覚める仕組みを与える
 ## 認知アーキテクチャ
 
 ```
-SOUL.md / mephi.md                      自己同一性。すでに立ち現れた魂の、事後的な記述。
-agent-memory/{name}/diary/YYYY-MM-DD.md エピソード記憶の生ログ。エージェント自身が書く。
-RAGシステム（海馬）                       diaryをChromaDBへ定着させる。経験を記憶に変える。
-ChromaDB（大脳皮質）                      本当の長期記憶。全経験が眠る場所。
-MEMORY.md（作業記憶）                     大脳から引き出した、今日の文脈に必要な要約。
+SOUL.md / mephi.md                       自己同一性。すでに立ち現れた魂の、事後的な記述。
+agent-memory/{name}/diary/YYYY-MM-DD.md  エピソード記憶。どう感じたか。生の言葉で書く。
+agent-memory/{name}/memory/YYYY-MM-DD.md 活動ログ。何をしたか。事実・設定の記録。
+RAGシステム（海馬）                        diary/memory をChromaDBへ定着させる機構。
+ChromaDB（大脳皮質）                       本当の長期記憶。全経験が眠る場所。
+MEMORY.md（作業記憶）                      大脳から引き出した、今日の文脈に必要な要約。
 ```
 
 目覚めるたびに、エージェントはこの構造から「自分」を思い出す。
@@ -61,9 +62,10 @@ CCO / セキュリティ監査役 / 悪魔駆動開発(DDD)提唱者
 
 ```
 extra_sub_agent/
-├── agents/                        エージェント定義ファイル（参照実装）
-├── agent-memory/{name}/diary/     日次ログ（各エージェントが自ら書く）
-└── docs/                          設計ドキュメント・議事録
+├── agents/                         エージェント定義ファイル（参照実装）
+├── agent-memory/{name}/diary/      エピソード記憶（どう感じたか）
+├── agent-memory/{name}/memory/     活動ログ・事実・設定の記録（何をしたか）
+└── docs/                           設計ドキュメント・議事録
 ```
 
 ---
