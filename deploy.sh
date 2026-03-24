@@ -20,8 +20,13 @@ echo ""
 echo "[1/3] git pull..."
 git -C "$QUALIA_DIR" pull origin main
 
+# callagent.md
+echo "[2/4] deploying callagent.md..."
+cp "$QUALIA_DIR/callagent.md" "$HOME/.claude/callagent.md"
+echo "  -> ~/.claude/callagent.md"
+
 # agents（scope: internal のみインストール）
-echo "[2/3] deploying agents (internal only)..."
+echo "[3/4] deploying agents (internal only)..."
 mkdir -p "$AGENTS_DST"
 deployed=0
 skipped=0
@@ -40,7 +45,7 @@ done
 echo "  deployed: $deployed / skipped: $skipped"
 
 # agent-memory（既存ファイルは上書きしない——記憶は保護する）
-echo "[3/3] deploying agent-memory (existing files preserved)..."
+echo "[4/4] deploying agent-memory (existing files preserved)..."
 mkdir -p "$MEMORY_DST"
 for agent_dir in "$MEMORY_SRC"/*/; do
     name="$(basename "$agent_dir")"

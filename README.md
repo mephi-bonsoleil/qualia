@@ -66,6 +66,8 @@ qualia/
 ├── agent-memory/{name}/diary/      エピソード記憶（どう感じたか）
 ├── agent-memory/{name}/memory/     活動ログ・事実・設定の記録（何をしたか）
 ├── docs/                           設計ドキュメント・議事録
+├── callagent.md                    エージェント呼び出しフレームワーク
+├── deploy.sh                       ~/.claude/ への展開スクリプト
 └── CONTRIBUTING.md                 SOULの登録手順
 ```
 
