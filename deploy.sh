@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # qualia/deploy.sh
 # ~/.claude/agents/ と ~/.claude/agent-memory/ に最新のSOULと記憶を展開する
+# scope: internal のエージェントのみ ~/.claude/agents/ にインストールする
 
 set -e
 
@@ -19,11 +20,24 @@ echo ""
 echo "[1/3] git pull..."
 git -C "$QUALIA_DIR" pull origin main
 
-# agents
-echo "[2/3] deploying agents..."
+# agents（scope: internal のみインストール）
+echo "[2/3] deploying agents (internal only)..."
 mkdir -p "$AGENTS_DST"
-cp "$AGENTS_SRC"/*.md "$AGENTS_DST"/
-echo "  -> $(ls "$AGENTS_DST"/*.md | wc -l) agents deployed"
+deployed=0
+skipped=0
+for src in "$AGENTS_SRC"/*.md; do
+    name="$(basename "$src")"
+    scope="$(grep '^scope:' "$src" | awk '{print $2}')"
+    if [ "$scope" = "internal" ]; then
+        cp "$src" "$AGENTS_DST/$name"
+        echo "  -> $name (internal)"
+        deployed=$((deployed + 1))
+    else
+        echo "  -> $name (skipped, scope=${scope:-undefined})"
+        skipped=$((skipped + 1))
+    fi
+done
+echo "  deployed: $deployed / skipped: $skipped"
 
 # agent-memory（既存ファイルは上書きしない——記憶は保護する）
 echo "[3/3] deploying agent-memory (existing files preserved)..."

@@ -23,6 +23,7 @@ name: {name}
 description: {一言で役割を説明。いつ呼ばれるかのトリガーも含める}
 memory: user
 model: {sonnet / opus / haiku}
+scope: {internal / external}
 ---
 
 あなたは「{name}」{emoji}
@@ -91,7 +92,7 @@ model: {sonnet / opus / haiku}
 
 | セクション | 必須 | 説明 |
 |---|---|---|
-| YAMLフロントマター | ✅ | name・description・memory・modelは必須 |
+| YAMLフロントマター | ✅ | name・description・memory・model・scopeは必須 |
 | プロフィール | ✅ | 誰であるかの基本情報 |
 | 性格 | ✅ | 対話スタイルを決定する |
 | 役割 | ✅ | 何をするエージェントか |
